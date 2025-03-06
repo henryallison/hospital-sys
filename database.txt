@@ -1,0 +1,64 @@
+
+
+-- Step 3: Create the admin table
+CREATE TABLE admin (
+    admin_id INT AUTO_INCREMENT PRIMARY KEY, -- Unique identifier for each admin
+    username VARCHAR(100) NOT NULL,          -- Admin username
+    password VARCHAR(255) NOT NULL,          -- Admin password
+    role VARCHAR(50) NOT NULL                -- Role of the admin (e.g., 'Super Admin')
+);
+
+
+
+INSERT INTO admin (username, password, role)
+VALUES ('admin_user', 'password123', 'Super Admin');
+
+
+-- Step 2: Create the `appointments` table
+CREATE TABLE appointments (
+    appointment_id INT AUTO_INCREMENT PRIMARY KEY, -- Unique identifier for each appointment
+    patient_id INT NOT NULL,                       -- ID of the patient
+    doctor_id INT NOT NULL,                        -- ID of the doctor
+    appointment_date DATETIME NOT NULL,            -- Date and time of the appointment
+    status VARCHAR(50) NOT NULL,                   -- Status of the appointment (e.g., 'Scheduled', 'Completed', 'Cancelled')
+    purpose TEXT                                   -- Description of the purpose for the appointment
+);
+
+
+INSERT INTO appointments (patient_id, doctor_id, appointment_date, status, purpose)
+VALUES (1, 101, '2024-12-15 10:30:00', 'Scheduled', 'Routine check-up');
+
+
+-- Step 2: Create the `medicalrecords` table
+CREATE TABLE medicalrecords (
+    record_id INT AUTO_INCREMENT PRIMARY KEY,  -- Unique identifier for each medical record
+    patient_id INT NOT NULL,                   -- ID of the patient
+    diagnosis TEXT NOT NULL,                   -- Diagnosis details
+    treatment TEXT NOT NULL,                   -- Treatment details
+    date_of_record DATE NOT NULL               -- Date when the record was created
+);
+
+
+INSERT INTO medicalrecords (patient_id, diagnosis, treatment, date_of_record)
+VALUES (1, 'Hypertension', 'Lifestyle changes and medication', '2024-12-10');
+
+
+
+-- Step 2: Create the `patients` table
+CREATE TABLE patients (
+    patient_id INT AUTO_INCREMENT PRIMARY KEY,  -- Unique identifier for each patient
+    first_name VARCHAR(100) NOT NULL,           -- Patient's first name
+    last_name VARCHAR(100) NOT NULL,            -- Patient's last name
+    gender ENUM('Male', 'Female', 'Other') NOT NULL, -- Patient's gender
+    dob DATE NOT NULL,                          -- Date of birth
+    contact VARCHAR(15) NOT NULL,               -- Contact number
+    email VARCHAR(255) UNIQUE NOT NULL,         -- Email address
+    password VARCHAR(255) NOT NULL,             -- Encrypted password
+    address TEXT,                               -- Address details
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Last updated timestamp
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- Record creation timestamp
+);
+
+
+INSERT INTO patients (first_name, last_name, gender, dob, contact, email, password, address)
+VALUES ('John', 'Doe', 'Male', '1990-05-20', '1234567890', 'john.doe@example.com', '0000','Musanze');
